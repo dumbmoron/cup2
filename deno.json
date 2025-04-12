@@ -1,0 +1,17 @@
+{
+    "name": "@imput/cup2",
+    "version": "0.0.1",
+    "exports": "./mod.ts",
+    "tasks": {
+        "dev": "deno test --watch mod.ts"
+    },
+    "license": "AGPL-3.0",
+    "imports": {
+        "@std/assert": "jsr:@std/assert@1"
+    },
+    "fmt": {
+        "indentWidth": 4,
+        "singleQuote": true,
+        "lineWidth": 100
+    }
+}
