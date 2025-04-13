@@ -17,9 +17,17 @@ import { CupParticipant } from './participant.ts';
 import * as Bytes from './lib/bytes.ts';
 import * as ECDSA from './lib/ecdsa.ts';
 
+/**
+ * Used for adding CUP parameters to requests, and later
+ * verifying the server's response signature.
+ */
 export class CupClient extends CupParticipant {
     #key_id: number;
-
+    /**
+     * @param key_id A key ID which is supported by the server
+     *               you are making requests to.
+     * @param key A public key used for verifying the server's response.
+     */
     constructor(key_id: number, key: CryptoKey) {
         if (key.type !== 'public') {
             throw `invalid key type: ${key.type}, must be 'public'`;

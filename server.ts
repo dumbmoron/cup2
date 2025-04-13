@@ -17,7 +17,14 @@ import { CupParticipant } from './participant.ts';
 import * as Bytes from './lib/bytes.ts';
 import * as ECDSA from './lib/ecdsa.ts';
 
+/**
+ * Used for adding the CUP signature to responses.
+ */
 export class CupServer extends CupParticipant {
+    /**
+     * @param keys A series of id -> private key pairs used to
+     *             handle client signature requests.
+     */
     constructor(keys: Record<number, CryptoKey>) {
         for (const key of Object.values(keys)) {
             if (key.type !== 'private') {
