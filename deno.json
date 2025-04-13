@@ -1,6 +1,6 @@
 {
     "name": "@imput/cup2",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "exports": "./mod.ts",
     "tasks": {
         "dev": "deno test --watch mod.ts"
