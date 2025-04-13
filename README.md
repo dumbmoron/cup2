@@ -4,6 +4,11 @@ Client/server implementation of the
 [Chromium/Omaha CUP-ECDSA protocol](https://github.com/google/omaha/blob/c0fcf45e4c46ddf2e1e7972f4405fb4ec7b4d079/doc/ClientUpdateProtocolEcdsa.md)
 in Typescript.
 
+## Installation
+
+- Deno: `deno add @imput/cup2`
+- Node.js: `npx jsr add @imput/cup2`
+
 ## Examples
 
 ### client
