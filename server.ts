@@ -39,7 +39,7 @@ export class CupServer extends CupParticipant {
      *                function, you don't need to clone it yourself.
      * @returns An opaque ticket representing the data needed to sign
      *          the response.
-    **/
+     */
     override makeTicket(request: Request): Promise<CupTicket> {
         return super.makeTicket(request);
     }
@@ -55,7 +55,7 @@ export class CupServer extends CupParticipant {
      *        it's a hack, only enable it if you are certain you need it.
      * @returns Response containing CUP headers with the
      *          signature.
-    **/
+     */
     async sign(response: Response, ticket: CupTicket, write_etag = false): Promise<Response> {
         // We know this key exists, because we validated it
         // in makeTicket(), and we know it's valid because

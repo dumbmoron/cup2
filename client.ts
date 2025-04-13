@@ -45,7 +45,7 @@ export class CupClient extends CupParticipant {
      *              than what is offered by `crypto.getRandomValues()`.
      * @returns An object containing the modified Request, as well as a ticket
      *          for use when verifying the response.
-    **/
+     */
     async wrap(request: Request, nonce?: string): Promise<{ request: Request; ticket: CupTicket }> {
         const url = new URL(request.url);
         const nonce_ = nonce || crypto.getRandomValues(new Uint32Array(1))[0];
@@ -69,7 +69,7 @@ export class CupClient extends CupParticipant {
      *                function, you don't need to clone it yourself.
      * @param ticket Ticket made by the wrap() call.
      * @returns Nothing.
-    **/
+     */
     async verify(response: Response, ticket: CupTicket): Promise<void> {
         const key = this.keys[ticket.keyId]!;
 
