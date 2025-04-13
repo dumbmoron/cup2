@@ -7,6 +7,7 @@ in Typescript.
 ## Examples
 
 ### client
+
 ```ts
 import { CupClient } from '@imput/cup2';
 
@@ -39,6 +40,7 @@ console.log(await response.text());
 ```
 
 ### server
+
 ```ts
 import { CupServer } from '@imput/cup2';
 
