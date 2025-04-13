@@ -8,6 +8,8 @@ on:
 jobs:
     test:
         uses: ./.github/workflows/deno.yml
+        permissions:
+            contents: read
     publish:
         needs: test
         runs-on: ubuntu-latest
