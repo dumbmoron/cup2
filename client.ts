@@ -33,10 +33,19 @@ export class CupClient extends CupParticipant {
         this.#key_id = key_id;
     }
 
-    // Takes a request and adds all the necessary CUP stuff to it
-    // as preparation for sendoff. Pass in `request` before its
-    // body is consumed. The request is cloned by the method, you
-    // do not need to clone it yourself.
+    /**
+     * Takes a request and adds all the necessary CUP stuff to it
+     * as preparation for sendoff. Pass in `request` before its
+     * body is consumed. The request is cloned by the method, you
+     * do not need to clone it yourself.
+     * @param request Request with unconsumed body. Cloned by the
+     *                function, you don't need to clone it yourself.
+     * @param nonce An optional nonce override for testing. Do not set
+     *              this in production unless you have a better PRNG
+     *              than what is offered by `crypto.getRandomValues()`.
+     * @returns An object containing the modified Request, as well as a ticket
+     *          for use when verifying the response.
+    **/
     async wrap(request: Request, nonce?: string): Promise<{ request: Request; ticket: CupTicket }> {
         const url = new URL(request.url);
         const nonce_ = nonce || crypto.getRandomValues(new Uint32Array(1))[0];
@@ -52,10 +61,15 @@ export class CupClient extends CupParticipant {
         };
     }
 
-    // Takes the server response and verifies that it was correctly
-    // signed by the expected ECDSA key, throws if the response is
-    // not valid. Response is cloned by the method, do not clone it
-    // yourself when passing it in.
+    /**
+     * Takes the server response and verifies that it was correctly
+     * signed by the expected ECDSA key, throws if the response is
+     * not valid.
+     * @param response Response with unconsumed body. Cloned by the
+     *                function, you don't need to clone it yourself.
+     * @param ticket Ticket made by the wrap() call.
+     * @returns Nothing.
+    **/
     async verify(response: Response, ticket: CupTicket): Promise<void> {
         const key = this.keys[ticket.keyId]!;
 

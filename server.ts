@@ -32,17 +32,30 @@ export class CupServer extends CupParticipant {
         super(keys);
     }
 
-    // Creates a ticket from the request body, which is used
-    // for later response signature. Pass in `request` before
-    // its body is consumed. The request is cloned by the method,
-    // you do not need to clone it yourself.
+    /**
+     * Creates a ticket from the request body, which is used
+     * for later response signature.
+     * @param request Request with unconsumed body. Cloned by the
+     *                function, you don't need to clone it yourself.
+     * @returns An opaque ticket representing the data needed to sign
+     *          the response.
+    **/
     override makeTicket(request: Request): Promise<CupTicket> {
         return super.makeTicket(request);
     }
 
-    // Takes the server response and modifies it so that
-    // it includes the server-signed CUP response in its
-    // headers.
+    /**
+     * Takes the server response and modifies it so that
+     * it includes the server-signed CUP response in its
+     * headers.
+     * @param response Response to sign.
+     * @param ticket Ticket made by the makeTicket() call.
+     * @param [write_etag=false] Whether to write the CUP signature
+     *        also into the ETag header. This is off by default because
+     *        it's a hack, only enable it if you are certain you need it.
+     * @returns Response containing CUP headers with the
+     *          signature.
+    **/
     async sign(response: Response, ticket: CupTicket, write_etag = false): Promise<Response> {
         // We know this key exists, because we validated it
         // in makeTicket(), and we know it's valid because
